@@ -1,0 +1,23 @@
+#!/bin/bash
+
+set -e
+
+function nocred {
+    echo environment variables aws_id and aws_key must be set with aws credentials
+    exit
+}
+
+function usage {
+    echo "get a file from Amazon's Simple Storage Service
+         "
+    echo "usage: "$0" bucketname filename
+         "
+    exit
+}
+
+if [ -z "$2" ]; then usage; fi
+if [ -z "$aws_id" ]; then nocred; fi
+if [ -z "$aws_key" ]; then nocred; fi
+
+s3curl.pl --id="$aws_id" --key="$aws_key" -- http://s3.amazonaws.com/"$1"/"$2" -O
+

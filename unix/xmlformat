@@ -1,0 +1,15 @@
+#!/bin/bash
+
+set -e
+
+# to use this, you need the xmlpretty utility available from
+# CPAN. To get xmlpretty, from the command line run:
+# perl -MCPAN -e install xmlpretty
+
+# this script expects input to be piped in from STDIN. for example:
+# cat yourfile.xml | xmlformat
+
+xmlpretty --PrettyWhiteNewline --PrettyWhiteIndent --CatchEmptyElement -
+
+echo ""
+

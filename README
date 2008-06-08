@@ -1,0 +1,98 @@
+Carlos McEvilly's Amazon S3 Convenience Scripts
+===============================================
+
+This package contains a set of convenience scripts to make it easier to
+use Amazon S3 (Simple Storage Service). See below for both quick start
+and detailed instructions.
+
+Please see the file LICENSES for information on copyrights and licenses.
+
+= Quick Start =
+
+The scripts have self-explanatory names and take the obvious arguments.
+Install the dependencies, set the aws_id and aws_key environment
+variables, and you're ready to go. More detailed info is below.
+
+= Why another set of S3 scripts? =
+
+There are plenty of small S3 convenience projects out there, so why
+another one? My goal with these scripts was to:
+
+* Make the simple even more simple (no unneeded options or features)
+* Simple operations that just do their job: put, get, delete, etc.
+* Focus strictly on getting things done from the command line
+* Require less typing, and easy-to-remember, consistent command syntax
+* No switches or options, just s3-put or s3-get <bucketname> <filename>
+* Run on both UNIX (including OS X) and Windows
+* Require only a minimal set of free software and libraries
+
+= Dependencies and Setup =
+
+You'll need the following installed on your system:
+
+Curl (it's free; search for Curl download)
+Perl (built in on UNIX; for Windows, get it from activeperl.com)
+Perl modules: Digest::HMAC_SHA1, MIME::Base64, Getopt::Long
+
+On UNIX, get and install the Perl modules from the command line using CPAN:
+
+perl -MCPAN -e install Digest::HMAC_SHA1
+perl -MCPAN -e install MIME::Base64
+perl -MCPAN -e install Getopt::Long
+
+On Windows, use ppm, which comes with ActiveState's Perl. From a
+Windows command prompt window, do:
+
+ppm
+> install Digest-HMAC_SHA1
+> install MIME-Base64
+> install Getopt-Long
+> exit
+
+= Setting your ID and Key =
+
+You'll need an ID and key from Amazon, which you get by going to
+http://aws.amazon.com/ and signing up for an Amazon Web Services
+(AWS) S3 account.
+
+To make best use of the S3 scripts, create two environment variables,
+aws_id and aws_key (lower case) containing your ID and your key for
+Amazon Web Services. You can use the tools without doing this, but
+then you would have to put your AWS credentials on the command line,
+which is a lot of typing and is also a bit worse from a security
+perspective.
+
+= Installation =
+
+Simply copy both s3curl.pl and all the script files from the directory
+for your platform (unix or mswin) to a directory that is on your path.
+
+= Scripts To Use =
+
+s3-mkb <bucketname>                    make a bucket
+s3-rmb <bucketname>                    remove a bucket
+s3-dir <bucketname>                    list contents of a bucket
+s3-put <bucketname> <filename>         upload a file into a bucket
+s3-get <bucketname> <filename>         download a file from a bucket
+s3-del <bucketname> <filename>         delete a file from a bucket
+
+= xmlformat =
+
+The xmlformat tool is a wrapper around a Perl utility called xmlpretty,
+also available from CPAN. Get xmlpretty from CPAN and then you can do
+this:
+
+s3-dir <bucketname> | xmlformat
+
+The output of your bucket listing will then be nicely formatted for
+easy reading.
+
+= Enhancements made to s3curl.pl =
+
+* fixed buggy handling of key and id arguments
+* tool now detects and sets the file type on image uploads
+
+= Feedback =
+
+Any feedback or bugs, please email me at carlos dot mcevilly at
+gmail dot com.

@@ -1,0 +1,28 @@
+#!/bin/bash
+
+set -e
+
+function noacl {
+    s3curl.pl --id="$aws_id" --key="$aws_key" --put=/dev/null -- http://s3.amazonaws.com/"$1"
+    exit
+}
+function nocred {
+    echo environment variables aws_id and aws_key must be set with aws credentials
+    exit
+}
+function usage {
+echo "make a bucket on Amazon's Simple Storage Service
+     "
+    echo "usage: "$0" bucketname [public-read]
+    "
+    exit
+}
+
+if [ -z "$1" ]; then usage; fi
+if [ -z "$aws_id" ]; then nocred; fi
+if [ -z "$aws_key" ]; then nocred; fi
+if [ -z "$2" ]; then noacl "$1"; fi
+if [ ! "$2"='public-read' ]; then usage; fi
+
+s3curl.pl --id="$aws_id" --key="$aws_key" --acl=public-read --put=/dev/null -- http://s3.amazonaws.com/"$1"
+

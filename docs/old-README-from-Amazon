@@ -1,0 +1,53 @@
+This script is a wrapper around curl, a popular command line http client, that
+will calculate the authentication parameters for the request.
+
+To get an object, you would run:
+
+./s3curl.pl --id=[aws-access-key-id] --key=[aws-secret-access-key] -- http://s3.amazonaws.com/[bucket-name]/[key-name]
+
+
+The arguments after the '--' are passed through to curl, so you could put any
+curl specific options there, and then the url you are trying to get.
+
+To put an object, run:
+
+./s3curl.pl --id=[aws-access-key-id] --key=[aws-secret-access-key] --put=<file-name> -- http://s3.amazonaws.com/[bucket-name]/[key-name]
+
+To delete an object:
+
+./s3curl.pl --id=[aws-access-key-id] --key=[aws-secret-access-key] --delete -- http://s3.amazonaws.com/[bucket-name]/[key-name]
+
+
+To list a bucket:
+
+./s3curl.pl --id=[aws-access-key-id] --key=[aws-secret-access-key] -- http://s3.amazonaws.com/[bucket-name]
+
+To create a bucket:
+
+./s3curl.pl --id=[aws-access-key-id] --key=[aws-secret-access-key] --put=/dev/null -- http://s3.amazonaws.com/[bucket-name]
+
+To delete a bucket:
+
+./s3curl.pl --id=[aws-access-key-id] --key=[aws-secret-access-key] --delete -- http://s3.amazonaws.com/[bucket-name]
+
+
+SECURITY CONSIDERATION:
+
+On a shared system, it is dangerous to specify your AWS Secret Access Key on
+the command line, as any other user on the machine can view your command line.
+It would be prudent to instead hard-code your security credentials and change
+permissions on the script to be non-world-readable.  An even better solution
+would be to find some way to encrypt your security credentials, but this is
+beyond the scope of this example.
+
+
+
+
+This software code is made available "AS IS" without warranties of any
+kind.  You may copy, display, modify and redistribute the software
+code either by itself or as incorporated into your code; provided that
+you do not remove any proprietary notices.  Your use of this software
+code is at your own risk and you waive any claim against Amazon
+Digital Services, Inc. or its affiliates with respect to your use of
+this software code. (c) 2006 Amazon Digital Services, Inc. or its
+affiliates.
