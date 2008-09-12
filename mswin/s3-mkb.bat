@@ -5,10 +5,10 @@ if x%aws_id%==x goto nocred
 if x%aws_key%==x goto nocred
 if not %2x==public-readx goto usage
 if not exist s3-empty.tmp type s3-empty.tmp > s3-empty.tmp
-s3curl.pl --id=%aws_id% --key=%aws_key% --acl=public-read --put=s3-empty.tmp -- http://s3.amazonaws.com/%1
+s3curl.pl --id=%aws_id% --key=%aws_key% --acl=public-read --put=s3-empty.tmp -- https://s3.amazonaws.com/%1
 goto end
 :noacl
-s3curl.pl --id=%aws_id% --key=%aws_key% --put=s3-empty.tmp -- http://s3.amazonaws.com/%1
+s3curl.pl --id=%aws_id% --key=%aws_key% --put=s3-empty.tmp -- https://s3.amazonaws.com/%1
 goto end
 :nocred
 echo environment variables aws_id and aws_key must be set with aws credentials

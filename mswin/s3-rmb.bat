@@ -2,7 +2,7 @@
 if %1x==x goto usage
 if x%aws_id%==x goto nocred
 if x%aws_key%==x goto nocred
-s3curl.pl --id=%aws_id% --key=%aws_key% --delete -- http://s3.amazonaws.com/%1
+s3curl.pl --id=%aws_id% --key=%aws_key% --delete -- https://s3.amazonaws.com/%1
 goto end
 :nocred
 echo environment variables aws_id and aws_key must be set with aws credentials

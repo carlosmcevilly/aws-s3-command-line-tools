@@ -18,5 +18,5 @@ function usage {
 if [ -z "$aws_id" ]; then nocred; fi
 if [ -z "$aws_key" ]; then nocred; fi
 
-s3curl.pl --id="$aws_id" --key="$aws_key" -- http://s3.amazonaws.com/"$1"
+s3curl.pl --id="$aws_id" --key="$aws_key" -- https://s3.amazonaws.com/"$1"
 

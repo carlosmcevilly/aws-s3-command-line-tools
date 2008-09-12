@@ -19,6 +19,6 @@ if [ -z "$2" ]; then usage; fi
 if [ -z "$aws_id" ]; then nocred; fi
 if [ -z "$aws_key" ]; then nocred; fi
 
-s3curl.pl --id="$aws_id" --key="$aws_key" --delete -- http://s3.amazonaws.com/"$1"/"$2"
+s3curl.pl --id="$aws_id" --key="$aws_key" --delete -- https://s3.amazonaws.com/"$1"/"$2"
 
 
