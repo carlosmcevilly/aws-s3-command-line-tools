@@ -3,7 +3,7 @@
 set -e
 
 function noacl {
-    s3curl.pl --id="$aws_id" --key="$aws_key" --put="$2" -- https://s3.amazonaws.com/"$1"/"$2"
+    s3curl.pl --id="$aws_id" --key="$aws_key" --put="$2" -- -o /dev/null https://s3.amazonaws.com/"$1"/"$2"
     exit
 }
 
@@ -26,5 +26,5 @@ if [ -z "$aws_key" ]; then nocred; fi
 if [ -z "$3" ]; then noacl "$1" "$2"; fi
 if [ ! "$3"='public-read' ]; then usage; fi
 
-s3curl.pl --id="$aws_id" --key="$aws_key" --acl=public-read --put="$2" -- https://s3.amazonaws.com/"$1"/"$2"
+s3curl.pl --id="$aws_id" --key="$aws_key" --acl=public-read --put="$2" -- -o /dev/null https://s3.amazonaws.com/"$1"/"$2"
 
